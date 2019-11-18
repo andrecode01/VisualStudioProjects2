@@ -1,0 +1,134 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');       
+
+        *
+        {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        body
+        {
+            background-image: url('../imgs/wallpaper.jpg');
+            background-size: cover;
+        }
+
+        ul
+        {
+            width: 60%;
+            margin: 25px auto;
+            max-height: 300px;
+            overflow: scroll;
+        }
+            ul::-webkit-scrollbar
+            {
+                opacity: 0;
+            }
+
+        ul li 
+        {
+            margin: 5px 0;
+            background: #0094ffdd;
+            position: relative;
+            padding: 5px 25px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        ul li span
+        {
+            color: #ffdd00;
+            text-transform: uppercase;
+        }
+
+        ul li a
+        {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #fff;
+            width: 100px;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        ul li a:hover
+        {
+            transition: .25s;
+            transform: translate3d(5px,-5px,0);
+            box-shadow: -5px 5px 0 0 #444;
+        }
+
+        form
+        {
+            width: 60%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: #444444dd;
+            padding: 10px;
+            color: #fff;
+            border-radius: 15px;
+            box-shadow: -3px 3px 3px 0 #fff;
+        }
+
+        form h2
+        {
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        form div
+        {
+            width: 70%;
+            margin: 10px auto;
+            text-align: justify;
+        }
+
+        form div input,
+        form div select
+        {
+            color: #fff;
+            border: none;
+            border-bottom: 2px solid #fff;
+            background: transparent;
+            width: 100%;
+        }
+
+        form div select option
+        {
+            color: #000;
+            background: transparent;
+        }
+
+        form #btnLogin
+        {
+            width: 35%;
+            padding: 2.5px;
+            border: none;
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 15px;
+            background-color: #0094ff;
+            color: #fff;
+            margin: 0 15%;
+        }
+
+        #txtMenssagem
+        {
+            width: 60%;
+            max-width: 500px;
+            padding: 5px;
+            margin: 5px auto;
+            color: #000;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
