@@ -12,31 +12,49 @@
 
         body
         {
+            min-height: 100vh;
             background-image: url('../imgs/wallpaper.jpg');
             background-size: cover;
+            background-repeat: no-repeat;
         }
 
         ul
         {
             width: 60%;
             margin: 25px auto;
-            max-height: 300px;
-            overflow: scroll;
+            max-height: 250px;
+            overflow-y: scroll;
+            background: #0094ff75;
         }
             ul::-webkit-scrollbar
             {
-                opacity: 0;
+                background: #444;
+                width: 5px;
+            }
+            ul::-webkit-scrollbar-thumb
+            {
+                background: #fff;
+            }
+            ul::-webkit-scrollbar-corner
+            {
+                display: none;
             }
 
         ul li 
         {
-            margin: 5px 0;
-            background: #0094ffdd;
+            margin: 5px;
             position: relative;
             padding: 5px 25px;
-            border-radius: 10px;
             color: #fff;
             font-weight: bold;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            background: #0073ac;
+        }
+
+        ul li:hover
+        {
+            background: #666;
         }
 
         ul li span
@@ -74,7 +92,6 @@
             padding: 10px;
             color: #fff;
             border-radius: 15px;
-            box-shadow: -3px 3px 3px 0 #fff;
         }
 
         form h2
@@ -123,11 +140,8 @@
 
         #txtMenssagem
         {
-            width: 60%;
-            max-width: 500px;
-            padding: 5px;
             margin: 5px auto;
-            color: #000;
+            color: #ffffff;
             font-weight: bold;
             letter-spacing: 3px;
             text-transform: uppercase;

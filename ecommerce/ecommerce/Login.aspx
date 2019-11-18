@@ -53,8 +53,8 @@
 
         <asp:Button Text="Cadastrar" ID="btnLogin" runat="server" OnClick="btnLogin_Click" />
 
+        <div id="txtMenssagem" runat="server"></div>
     </form>
-    <div id="txtMenssagem" runat="server"></div>
 
 </body>
 </html>
