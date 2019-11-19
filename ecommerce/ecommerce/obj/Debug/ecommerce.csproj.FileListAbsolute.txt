@@ -31,3 +31,7 @@ c:\users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\bin\Mi
 c:\users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\obj\Debug\ecommerce.csprojResolveAssemblyReference.cache
 c:\users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\obj\Debug\ecommerce.dll
 c:\users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\obj\Debug\ecommerce.pdb
+C:\Users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\bin\EntityFramework.dll
+C:\Users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\bin\EntityFramework.SqlServer.dll
+C:\Users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\bin\EntityFramework.xml
+C:\Users\andrec\documents\visual studio 2015\Projects\ecommerce\ecommerce\bin\EntityFramework.SqlServer.xml

@@ -15,10 +15,10 @@
     <asp:ListView id="lvUsuarios" runat="server">
         <ItemTemplate>
             <li>
-               Email : <%# Eval("Email") %><br />
-               Nome  : <%# Eval("Nome") %> [<span><%# DataBinder.Eval(Container.DataItem, "nivel.NomeNivel") %></span>]
+               Email : <%# Eval("EmailUsuario") %><br />
+               Nome  : <%# Eval("NomeUsuario") %> [<!--<span><%# DataBinder.Eval(Container.DataItem, "nivel.NomeNivel") %></span>-->]
 
-                <a href="Login.aspx?login=<%# Eval("Email") %>">Login</a>
+                <a href="Login.aspx?login=<%# Eval("EmailUsuario") %>">Login</a>
             </li>
         </ItemTemplate>
     </asp:ListView>

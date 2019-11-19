@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EcommerceDBModelStoreContainer" CdmEntityContainer="EcommerceDBEntities">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="EcommerceDBModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="NomeUsuario" ColumnName="NomeUsuario" />
+          <ScalarProperty Name="EmailUsuario" ColumnName="EmailUsuario" />
+          <ScalarProperty Name="SenhaUsuario" ColumnName="SenhaUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

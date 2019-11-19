@@ -40,14 +40,16 @@ namespace ecommerce
 
             var u = usuario;
 
-            FormsAuthentication.SetAuthCookie(u.Nome, true);
+            FormsAuthentication.SetAuthCookie(u.NomeUsuario, true);
             Response.Redirect("~/");
         }
 
         private void popularLvUsuarios()
         {
-            lvUsuarios.DataSource = Usuario.ListaUsuarios;
-            lvUsuarios.DataBind();
+            using (var ctx = new EcommerceDBEntities()) { 
+                lvUsuarios.DataSource = (from u in ctx.Usuarios select u).ToList();
+                lvUsuarios.DataBind();
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -55,9 +57,9 @@ namespace ecommerce
 
             Usuario user = new Usuario();
 
-            user.Email = inpEmail.Value;
-            user.Nome = inpNome.Value;
-            user.Senha = FormsAuthentication.HashPasswordForStoringInConfigFile(inpPass.Value, "SHA1");
+            user.EmailUsuario = inpEmail.Value;
+            user.NomeUsuario = inpNome.Value;
+            user.SenhaUsuario = FormsAuthentication.HashPasswordForStoringInConfigFile(inpPass.Value, "SHA1");
             user.nivel = NivelUsuario.ObterNivelByNomeNivel(slctNivel.Value);
 
             if (Usuario.CadastrarUsuario(user))
