@@ -9,7 +9,6 @@ namespace ecommerce
 {
     public partial class Usuario
     {
-        public static List<Usuario> ListaUsuarios;
 
         public NivelUsuario nivel{ get; set; }
         /*
@@ -19,13 +18,14 @@ namespace ecommerce
         */
 
 
-        public static Usuario ObterUsuarioByEmail(string email)
+        public static Usuario ObterUsuarioById(int idUsuario)
         {
-            if (ListaUsuarios == null) return null;
-
-            var user = ListaUsuarios.
-                FirstOrDefault(u => u.EmailUsuario == email);
-            return user;
+            using (var ctx = new EcommerceDBEntities())
+            {
+                List<Usuario> ListaUsuarios = (from u in ctx.Usuarios select u).ToList();
+                var user = ListaUsuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+                return user;
+            }
         }
 
         public static bool CadastrarUsuario(Usuario user)

@@ -18,7 +18,7 @@
                Email : <%# Eval("EmailUsuario") %><br />
                Nome  : <%# Eval("NomeUsuario") %> [<!--<span><%# DataBinder.Eval(Container.DataItem, "nivel.NomeNivel") %></span>-->]
 
-                <a href="Login.aspx?login=<%# Eval("EmailUsuario") %>">Login</a>
+                <a href="Login.aspx?login=<%# Eval("IdUsuario") %>">Login</a>
             </li>
         </ItemTemplate>
     </asp:ListView>

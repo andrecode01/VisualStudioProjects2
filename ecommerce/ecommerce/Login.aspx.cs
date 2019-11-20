@@ -9,14 +9,30 @@ using System.Web.Security;
 
 namespace ecommerce
 {
+    
     public partial class Login : System.Web.UI.Page
     {
+        private static bool criarBd = true;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Usuario.ListaUsuarios == null)
+            using (var ctx = new EcommerceDBEntities())
             {
-                Usuario.criarUsuariosDefault();
+                
+                while (criarBd == true) { 
+                var deleteCommand = ctx.Database.Connection.CreateCommand();
+                deleteCommand.CommandText = "DELETE FROM Usuario";
+                ctx.Database.Connection.Open();
+                deleteCommand.ExecuteNonQuery();
+                ctx.Database.Connection.Close();
+                    criarBd = false;
+                }
+                List<Usuario> usuarios = (from u in ctx.Usuarios select u).ToList();
+                if(usuarios.Count() == 0)
+                {
+                    Usuario.criarUsuariosDefault();
+                }
+                
             }
 
             if (!Page.IsPostBack)
@@ -28,7 +44,8 @@ namespace ecommerce
 
             if (qsLogar != null)
             {
-                forcarLogin(Usuario.ObterUsuarioByEmail(qsLogar));
+                int a = Convert.ToInt32(qsLogar);
+                forcarLogin(Usuario.ObterUsuarioById(a));
             }
 
         }
