@@ -6,6 +6,10 @@
 <head runat="server">
 
     <title>Página de Login</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="css/Login.css" rel="stylesheet" />
 
 </head>
@@ -16,24 +20,25 @@
         <ItemTemplate>
             <li>
                Email : <%# Eval("EmailUsuario") %><br />
-               Nome  : <%# Eval("NomeUsuario") %> [<!--<span><%# DataBinder.Eval(Container.DataItem, "nivel.NomeNivel") %></span>-->]
+               Nome  : <%# Eval("NomeUsuario") %> [<span><%# DataBinder.Eval(Container.DataItem, "NivelUsuario.NomeNivelUsuario") %></span>]
 
-                <a href="Login.aspx?login=<%# Eval("EmailUsuario") %>">Login</a>
+                <a href="Login.aspx?login=<%# Eval("IdUsuario") %>">Login</a>
             </li>
         </ItemTemplate>
     </asp:ListView>
     </ul>
 
+    <div class="form">
+    <h2 class="formTitle">Cadastrar novo Usuário</h2>
     <form id="form1" runat="server">
 
-        <h2>Cadastrar novo Usuário</h2>
-
-        <div>
-            <p>Nome</p>
+        <div class="divInputs">
+            
             <input type="text" id="inpNome" required runat="server"/>
+            <p>Nome</p>
         </div>
 
-        <div>
+        <div class="divSelect">
             <p>Nivel</p>
             <select id="slctNivel" runat="server">
                 <option value="Cliente">Cliente</option>
@@ -41,20 +46,23 @@
             </select>
         </div>
         
-        <div>
+        <div class="divInputs">
+            
+            <input type="text" id="inpEmail" required runat="server"/>
             <p>Email</p>
-            <input type="email" id="inpEmail" required runat="server"/>
         </div>
 
-        <div>
-            <p>Senha</p>
+        <div class="divInputs">
+            
             <input type="password" id="inpPass" required runat="server"/>
+            <p>Senha</p>
         </div>
 
         <asp:Button Text="Cadastrar" ID="btnLogin" runat="server" OnClick="btnLogin_Click" />
 
         <div id="txtMenssagem" runat="server"></div>
     </form>
+    </div>
 
 </body>
 </html>

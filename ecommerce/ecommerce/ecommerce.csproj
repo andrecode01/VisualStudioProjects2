@@ -161,7 +161,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EcommerceEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NivelUsuario.cs" />
+    <Compile Include="NivelUsuario.cs">
+      <DependentUpon>EcommerceEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NivelUsuarioDAO.cs" />
     <Compile Include="Usuario.cs">
       <DependentUpon>EcommerceEntities.tt</DependentUpon>
     </Compile>

@@ -1,70 +1,64 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');       
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: sans-serif;
+    outline: none;
+    box-sizing: border-box;
+}
 
-        *
-        {
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
-            list-style: none;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-        }
+body {
+    min-height: 100vh;
+    background-image: url('../imgs/wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
 
-        body
-        {
-            min-height: 100vh;
-            background-image: url('../imgs/wallpaper.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+ul {
+    width: 60%;
+    margin: 25px auto;
+    max-height: 250px;
+    overflow-y: scroll;
+    background: #0094ff75;
+}
 
-        ul
-        {
-            width: 60%;
-            margin: 25px auto;
-            max-height: 250px;
-            overflow-y: scroll;
-            background: #0094ff75;
-        }
-            ul::-webkit-scrollbar
-            {
-                background: #444;
-                width: 5px;
-            }
-            ul::-webkit-scrollbar-thumb
-            {
-                background: #fff;
-            }
-            ul::-webkit-scrollbar-corner
-            {
-                display: none;
-            }
+    ul::-webkit-scrollbar {
+        background: #444;
+        width: 5px;
+    }
 
-        ul li 
-        {
-            margin: 5px;
-            position: relative;
-            padding: 5px 25px;
-            color: #fff;
-            font-weight: bold;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            background: #0073ac;
-        }
+    ul::-webkit-scrollbar-thumb {
+        background: #fff;
+    }
 
-        ul li:hover
-        {
+    ul::-webkit-scrollbar-corner {
+        display: none;
+    }
+
+    ul li {
+        margin: 5px;
+        position: relative;
+        padding: 5px 25px;
+        color: #fff;
+        font-weight: bold;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        background: #0073ac;
+    }
+
+        ul li:hover {
             background: #666;
         }
 
-        ul li span
-        {
+        ul li span {
             color: #ffdd00;
             text-transform: uppercase;
         }
 
-        ul li a
-        {
+        ul li a {
             position: absolute;
             bottom: 5px;
             right: 5px;
@@ -76,73 +70,115 @@
             border-radius: 5px;
         }
 
-        ul li a:hover
-        {
-            transition: .25s;
-            transform: translate3d(5px,-5px,0);
-            box-shadow: -5px 5px 0 0 #444;
-        }
+            ul li a:hover {
+                transition: .25s;
+                transform: translate3d(5px,-5px,0);
+                box-shadow: -5px 5px 0 0 #444;
+            }
 
-        form
-        {
-            width: 60%;
-            max-width: 500px;
-            margin: 0 auto;
-            background: #444444dd;
-            padding: 10px;
-            color: #fff;
-            border-radius: 15px;
-        }
+.form {
+    width: 60%;
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(20,20,20,.9);
+    color: #fff;
+    border-radius: 15px;
+}
 
-        form h2
-        {
+.formTitle {
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 5px 0;
+    background: linear-gradient(180deg, #0094ff, transparent);
+}
+
+form .divInputs {
+    width: 75%;
+    margin: 10px auto;
+    height: 40px;
+    text-align: justify;
+    position: relative;
+}
+
+    form .divInputs p {
+        bottom: 5%;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    form div input{
+        position: absolute;
+        bottom: 0;
+        color: #fff;
+        border: none;
+        border-bottom: 2px solid #fff;
+        background: transparent;
+        width: 100%;
+    }
+
+    form .divSelect {
+        width: 75%;
+        margin: 10px auto;
+        height: 30px;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+        form .divSelect  p {
+            width: 25%;
             text-align: center;
-            letter-spacing: 3px;
+            box-shadow: inset 0 -2px 0 0 #fff;
         }
 
-        form div
-        {
-            width: 70%;
-            margin: 10px auto;
-            text-align: justify;
-        }
-
-        form div input,
-        form div select
-        {
+        form div select {
+            width: 75%;
+            background: transparent;
             color: #fff;
             border: none;
             border-bottom: 2px solid #fff;
-            background: transparent;
-            width: 100%;
+            border-left: 1px solid #fff;
         }
 
-        form div select option
-        {
+        form div select option {
             color: #000;
-            background: transparent;
         }
 
-        form #btnLogin
-        {
-            width: 35%;
-            padding: 2.5px;
-            border: none;
-            letter-spacing: 1px;
-            font-weight: bold;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 15px;
-            background-color: #0094ff;
-            color: #fff;
-            margin: 0 15%;
-        }
+    form .divInputs input:focus ~ p,
+    form .divInputs input:valid ~ p {
+        transition: .5s;
+        color: #0094ff;
+        bottom: 50%;
+        font-size: 12px;
+    }
 
-        #txtMenssagem
-        {
-            margin: 5px auto;
-            color: #ffffff;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+    form .divInputs input:focus,
+    form .divInputs input:valid {
+        border-color: #0094ff;
+    }
+
+
+
+
+form #btnLogin {
+    width: 80%;
+    padding: 2.5px;
+    border: none;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#0094ff,purple);
+    color: #fff;
+    margin: 10px 10%;
+}
+
+#txtMenssagem {
+    margin: 5px auto;
+    color: #b6ff00;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+}

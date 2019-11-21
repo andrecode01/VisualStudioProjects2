@@ -8,8 +8,35 @@
     <Property Name="NomeUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="EmailUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SenhaUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Usua_IdNivelUsuario" Type="Int32" />
+    <NavigationProperty Name="NivelUsuario" Relationship="EcommerceDBModel.IdNivelUsuario" FromRole="Usuario" ToRole="NivelUsuario" />
   </EntityType>
   <EntityContainer Name="EcommerceDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <EntitySet Name="NivelUsuarios" EntityType="EcommerceDBModel.NivelUsuario" />
+    <AssociationSet Name="IdNivelUsuario" Association="EcommerceDBModel.IdNivelUsuario">
+      <End Role="NivelUsuario" EntitySet="NivelUsuarios" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="NivelUsuario">
+    <Key>
+      <PropertyRef Name="IdNivelUsuario" />
+    </Key>
+    <Property Name="IdNivelUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeNivelUsuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="EcommerceDBModel.IdNivelUsuario" FromRole="NivelUsuario" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="IdNivelUsuario">
+    <End Type="EcommerceDBModel.NivelUsuario" Role="NivelUsuario" Multiplicity="0..1" />
+    <End Type="EcommerceDBModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelUsuario">
+        <PropertyRef Name="IdNivelUsuario" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Usua_IdNivelUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

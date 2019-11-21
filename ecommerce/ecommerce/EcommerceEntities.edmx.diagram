@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5d0dc37dbed84e54bacb40bcb3f7b89b" Name="Diagram1">
         <EntityTypeShape EntityType="EcommerceDBModel.Usuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceDBModel.NivelUsuario" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="EcommerceDBModel.IdNivelUsuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

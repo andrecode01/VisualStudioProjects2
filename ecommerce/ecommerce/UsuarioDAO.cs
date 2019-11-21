@@ -9,33 +9,30 @@ namespace ecommerce
 {
     public partial class Usuario
     {
-        public static List<Usuario> ListaUsuarios;
 
-        public NivelUsuario nivel{ get; set; }
         /*
+        public NivelUsuario nivel{ get; set; }
         public string Nome { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
         */
 
 
-        public static Usuario ObterUsuarioByEmail(string email)
+        public static Usuario ObterUsuarioById(int id)
         {
-            if (ListaUsuarios == null) return null;
-
-            var user = ListaUsuarios.
-                FirstOrDefault(u => u.EmailUsuario == email);
-            return user;
+            using (var ctx = new EcommerceDBEntities())
+            {
+                List<Usuario> listaUsuarios = (from u in ctx.Usuarios select u).ToList();
+                var user = listaUsuarios.
+                    FirstOrDefault(u => u.IdUsuario == id);
+                return user;
+            }
         }
 
         public static bool CadastrarUsuario(Usuario user)
         {
             if (user != null)
             {
-                /*if (ListaUsuarios == null)
-                {
-                    ListaUsuarios = new List<Usuario>();
-                }*/
                 using (var ctx = new EcommerceDBEntities())
                 {
                     ctx.Usuarios.Add(user);
@@ -56,13 +53,13 @@ namespace ecommerce
 
                 cliente.EmailUsuario = "opensador@email.com";
                 cliente.NomeUsuario = "Dante Alighieri";
-                //cliente.nivel = NivelUsuario.ObterNivelByNomeNivel("Cliente");
+                cliente.NivelUsuario = NivelUsuario.ObterNivelUsuarioByNome("Cliente");
                 var senhaHashCliente = FormsAuthentication.HashPasswordForStoringInConfigFile("cliente8800", "SHA1");
                 cliente.SenhaUsuario = senhaHashCliente;
 
                 adm.EmailUsuario = "musk123@email.com";
                 adm.NomeUsuario = "Elon Musk";
-                //adm.nivel = NivelUsuario.ObterNivelByNomeNivel("Admin");
+                adm.NivelUsuario = NivelUsuario.ObterNivelUsuarioByNome("Admin");
                 var senhaHashAdm = FormsAuthentication.HashPasswordForStoringInConfigFile("adm8800", "SHA1");
                 adm.SenhaUsuario = senhaHashAdm;
 

@@ -11,12 +11,41 @@ namespace ecommerce
 {
     public partial class Login : System.Web.UI.Page
     {
+
+        public static bool criarBd = true;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Usuario.ListaUsuarios == null)
+            using (var ctx = new EcommerceDBEntities())
             {
-                Usuario.criarUsuariosDefault();
+
+                while (criarBd)
+                {
+                    var deletarUsuarios = ctx.Database.Connection.CreateCommand();
+                    var deletarNivelUsuarios = ctx.Database.Connection.CreateCommand();
+
+                    deletarUsuarios.CommandText = "DELETE FROM Usuario";
+                    deletarNivelUsuarios.CommandText = "DELETE FROM NivelUsuario";
+
+                    ctx.Database.Connection.Open();
+                    deletarUsuarios.ExecuteNonQuery();
+                    deletarNivelUsuarios.ExecuteNonQuery();
+                    ctx.Database.Connection.Close();
+                    criarBd = false;
+                }
+
+                List<NivelUsuario> niveis = (from u in ctx.NivelUsuarios select u).ToList();
+                if (niveis.Count() == 0)
+                {
+                    NivelUsuario.criarNiveisDeUsuarios();
+                }
+
+                List<Usuario> usuarios = (from u in ctx.Usuarios select u).ToList();
+                if (usuarios.Count() == 0)
+                {
+                    Usuario.criarUsuariosDefault();
+                }
+
             }
 
             if (!Page.IsPostBack)
@@ -28,7 +57,8 @@ namespace ecommerce
 
             if (qsLogar != null)
             {
-                forcarLogin(Usuario.ObterUsuarioByEmail(qsLogar));
+                int a = Convert.ToInt32(qsLogar);
+                forcarLogin(Usuario.ObterUsuarioById(a));
             }
 
         }
@@ -56,11 +86,11 @@ namespace ecommerce
         {
 
             Usuario user = new Usuario();
-
             user.EmailUsuario = inpEmail.Value;
             user.NomeUsuario = inpNome.Value;
             user.SenhaUsuario = FormsAuthentication.HashPasswordForStoringInConfigFile(inpPass.Value, "SHA1");
-            user.nivel = NivelUsuario.ObterNivelByNomeNivel(slctNivel.Value);
+
+            user.NivelUsuario = NivelUsuario.ObterNivelUsuarioByNome(slctNivel.Value);
 
             if (Usuario.CadastrarUsuario(user))
                 txtMenssagem.InnerText = "Cadastrado com Sucesso!";

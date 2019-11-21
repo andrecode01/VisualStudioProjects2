@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="EcommerceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="NivelUsuario">
+    <Key>
+      <PropertyRef Name="IdNivelUsuario" />
+    </Key>
+    <Property Name="IdNivelUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeNivelUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="IdUsuario" />
@@ -8,8 +15,26 @@
     <Property Name="NomeUsuario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="EmailUsuario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="SenhaUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Usua_IdNivelUsuario" Type="int" />
   </EntityType>
+  <Association Name="IdNivelUsuario">
+    <End Role="NivelUsuario" Type="Self.NivelUsuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelUsuario">
+        <PropertyRef Name="IdNivelUsuario" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Usua_IdNivelUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="EcommerceDBModelStoreContainer">
+    <EntitySet Name="NivelUsuario" EntityType="Self.NivelUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="IdNivelUsuario" Association="Self.IdNivelUsuario">
+      <End Role="NivelUsuario" EntitySet="NivelUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

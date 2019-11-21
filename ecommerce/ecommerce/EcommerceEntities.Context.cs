@@ -26,5 +26,6 @@ namespace ecommerce
         }
     
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<NivelUsuario> NivelUsuarios { get; set; }
     }
 }
