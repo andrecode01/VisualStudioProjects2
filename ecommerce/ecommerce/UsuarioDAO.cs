@@ -18,6 +18,7 @@ namespace ecommerce
         */
 
 
+<<<<<<< HEAD
         public static Usuario ObterUsuarioById(int id)
         {
             using (var ctx = new EcommerceDBEntities())
@@ -26,6 +27,15 @@ namespace ecommerce
                 var user = listaUsuarios.
                     FirstOrDefault(u => u.IdUsuario == id);
                 return user;
+=======
+        public static Usuario ObterUsuarioById(int idUsuario)
+        {
+            using (var ctx = new EcommerceDBEntities())
+            {
+                List<Usuario> ListaUsuarios = (from u in ctx.Usuarios select u).ToList();
+                var user = ListaUsuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+                return user;
+>>>>>>> dbaccfbae97c862159ad140408d7cc481a4a85c6
             }
         }
 

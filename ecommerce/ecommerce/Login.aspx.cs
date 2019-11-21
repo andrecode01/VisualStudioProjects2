@@ -9,8 +9,10 @@ using System.Web.Security;
 
 namespace ecommerce
 {
+    
     public partial class Login : System.Web.UI.Page
     {
+<<<<<<< HEAD
 
         public static bool criarBd = true;
         protected void Page_Load(object sender, EventArgs e)
@@ -46,6 +48,29 @@ namespace ecommerce
                     Usuario.criarUsuariosDefault();
                 }
 
+=======
+        private static bool criarBd = true;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            using (var ctx = new EcommerceDBEntities())
+            {
+                
+                while (criarBd == true) { 
+                var deleteCommand = ctx.Database.Connection.CreateCommand();
+                deleteCommand.CommandText = "DELETE FROM Usuario";
+                ctx.Database.Connection.Open();
+                deleteCommand.ExecuteNonQuery();
+                ctx.Database.Connection.Close();
+                    criarBd = false;
+                }
+                List<Usuario> usuarios = (from u in ctx.Usuarios select u).ToList();
+                if(usuarios.Count() == 0)
+                {
+                    Usuario.criarUsuariosDefault();
+                }
+                
+>>>>>>> dbaccfbae97c862159ad140408d7cc481a4a85c6
             }
 
             if (!Page.IsPostBack)
