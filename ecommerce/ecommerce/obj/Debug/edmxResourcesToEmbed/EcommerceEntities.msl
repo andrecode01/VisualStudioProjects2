@@ -20,5 +20,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Produtoes">
+      <EntityTypeMapping TypeName="EcommerceDBModel.Produto">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="EstoqueProduto" ColumnName="EstoqueProduto" />
+          <ScalarProperty Name="PrecoProduto" ColumnName="PrecoProduto" />
+          <ScalarProperty Name="PesoVolumeProduto" ColumnName="PesoVolumeProduto" />
+          <ScalarProperty Name="NomeProduto" ColumnName="NomeProduto" />
+          <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrinhoUsuarios">
+      <EntityTypeMapping TypeName="EcommerceDBModel.CarrinhoUsuario">
+        <MappingFragment StoreEntitySet="CarrinhoUsuario">
+          <ScalarProperty Name="Carrinho_CodigoProduto" ColumnName="Carrinho_CodigoProduto" />
+          <ScalarProperty Name="Carrinho_IdUsuario" ColumnName="Carrinho_IdUsuario" />
+          <ScalarProperty Name="PrecoTotal" ColumnName="PrecoTotal" />
+          <ScalarProperty Name="QuantidadeProdutos" ColumnName="QuantidadeProdutos" />
+          <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
+          <ScalarProperty Name="IdCarrinho" ColumnName="IdCarrinho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

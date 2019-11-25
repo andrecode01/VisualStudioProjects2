@@ -12,13 +12,30 @@ namespace ecommerce
     
     public partial class Login : System.Web.UI.Page
     {
-<<<<<<< HEAD
-
         public static bool criarBd = true;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            using (var ctx = new EcommerceDBEntities())
+            resetarBD();
+
+            var qsLogar = Request.QueryString["login"];
+
+            if (qsLogar != null)
+            {
+                int a = Convert.ToInt32(qsLogar);
+                forcarLogin(Usuario.ObterUsuarioById(a));
+            }
+
+            if (!Page.IsPostBack)
+            {
+                popularLvUsuarios();
+            }
+
+        }
+
+        private void resetarBD()
+        {
+            using (var ctx = new EcommerceDBEntitiesNew())
             {
 
                 while (criarBd)
@@ -36,56 +53,17 @@ namespace ecommerce
                     criarBd = false;
                 }
 
-                List<NivelUsuario> niveis = (from u in ctx.NivelUsuarios select u).ToList();
-                if (niveis.Count() == 0)
+                var qtdNiveis = ctx.NivelUsuarios.ToList().Count();
+                if (qtdNiveis == 0)
                 {
-                    NivelUsuario.criarNiveisDeUsuarios();
+                    NivelUsuario.CriarNivelUsuario("Admin");
+                    NivelUsuario.CriarNivelUsuario("Cliente");
                 }
 
-                List<Usuario> usuarios = (from u in ctx.Usuarios select u).ToList();
-                if (usuarios.Count() == 0)
-                {
+                var qtdUsuarios = ctx.Usuarios.ToList().Count();
+                if (qtdUsuarios == 0)
                     Usuario.criarUsuariosDefault();
-                }
-
-=======
-        private static bool criarBd = true;
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-            using (var ctx = new EcommerceDBEntities())
-            {
-                
-                while (criarBd == true) { 
-                var deleteCommand = ctx.Database.Connection.CreateCommand();
-                deleteCommand.CommandText = "DELETE FROM Usuario";
-                ctx.Database.Connection.Open();
-                deleteCommand.ExecuteNonQuery();
-                ctx.Database.Connection.Close();
-                    criarBd = false;
-                }
-                List<Usuario> usuarios = (from u in ctx.Usuarios select u).ToList();
-                if(usuarios.Count() == 0)
-                {
-                    Usuario.criarUsuariosDefault();
-                }
-                
->>>>>>> dbaccfbae97c862159ad140408d7cc481a4a85c6
             }
-
-            if (!Page.IsPostBack)
-            {
-                popularLvUsuarios();
-            }
-
-            var qsLogar = Request.QueryString["login"];
-
-            if (qsLogar != null)
-            {
-                int a = Convert.ToInt32(qsLogar);
-                forcarLogin(Usuario.ObterUsuarioById(a));
-            }
-
         }
 
         private void forcarLogin(Usuario usuario)
@@ -95,16 +73,15 @@ namespace ecommerce
 
             var u = usuario;
 
-            FormsAuthentication.SetAuthCookie(u.NomeUsuario, true);
+            FormsAuthentication.SetAuthCookie(u.IdUsuario.ToString(), true);
             Response.Redirect("~/");
         }
 
         private void popularLvUsuarios()
         {
-            using (var ctx = new EcommerceDBEntities()) { 
-                lvUsuarios.DataSource = (from u in ctx.Usuarios select u).ToList();
-                lvUsuarios.DataBind();
-            }
+             
+            lvUsuarios.DataSource = Usuario.ObterUsuarios();
+            lvUsuarios.DataBind();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

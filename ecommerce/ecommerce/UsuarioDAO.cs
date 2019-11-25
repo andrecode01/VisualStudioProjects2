@@ -10,32 +10,23 @@ namespace ecommerce
     public partial class Usuario
     {
 
-        /*
-        public NivelUsuario nivel{ get; set; }
-        public string Nome { get; set; }
-        public string Senha { get; set; }
-        public string Email { get; set; }
-        */
-
-
-<<<<<<< HEAD
+        public static List<Usuario> ObterUsuarios()
+        {
+            List<Usuario> usuarios;
+            using (var ctx = new EcommerceDBEntitiesNew())
+            {
+                usuarios = ctx.Usuarios.ToList();
+            }
+            return usuarios;
+        }
+  
         public static Usuario ObterUsuarioById(int id)
         {
-            using (var ctx = new EcommerceDBEntities())
-            {
-                List<Usuario> listaUsuarios = (from u in ctx.Usuarios select u).ToList();
-                var user = listaUsuarios.
-                    FirstOrDefault(u => u.IdUsuario == id);
-                return user;
-=======
-        public static Usuario ObterUsuarioById(int idUsuario)
-        {
-            using (var ctx = new EcommerceDBEntities())
+            using (var ctx = new EcommerceDBEntitiesNew())
             {
                 List<Usuario> ListaUsuarios = (from u in ctx.Usuarios select u).ToList();
-                var user = ListaUsuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+                var user = ListaUsuarios.FirstOrDefault(u => u.IdUsuario == id);
                 return user;
->>>>>>> dbaccfbae97c862159ad140408d7cc481a4a85c6
             }
         }
 
@@ -43,7 +34,7 @@ namespace ecommerce
         {
             if (user != null)
             {
-                using (var ctx = new EcommerceDBEntities())
+                using (var ctx = new EcommerceDBEntitiesNew())
                 {
                     ctx.Usuarios.Add(user);
                     ctx.SaveChanges();

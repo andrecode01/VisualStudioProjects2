@@ -8,8 +8,9 @@
     <Property Name="NomeUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="EmailUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SenhaUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Usua_IdNivelUsuario" Type="Int32" />
+    <Property Name="Usua_IdNivelUsuario" Type="Int32" Nullable="false" />
     <NavigationProperty Name="NivelUsuario" Relationship="EcommerceDBModel.IdNivelUsuario" FromRole="Usuario" ToRole="NivelUsuario" />
+    <NavigationProperty Name="CarrinhoUsuarios" Relationship="EcommerceDBModel.Carrinho_IdUsuario" FromRole="Usuario" ToRole="CarrinhoUsuario" />
   </EntityType>
   <EntityContainer Name="EcommerceDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
@@ -17,6 +18,16 @@
     <AssociationSet Name="IdNivelUsuario" Association="EcommerceDBModel.IdNivelUsuario">
       <End Role="NivelUsuario" EntitySet="NivelUsuarios" />
       <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <EntitySet Name="Produtoes" EntityType="EcommerceDBModel.Produto" />
+    <EntitySet Name="CarrinhoUsuarios" EntityType="EcommerceDBModel.CarrinhoUsuario" />
+    <AssociationSet Name="Carrinho_IdUsuario" Association="EcommerceDBModel.Carrinho_IdUsuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="CarrinhoUsuario" EntitySet="CarrinhoUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="Carrinho_CodigoProduto" Association="EcommerceDBModel.Carrinho_CodigoProduto">
+      <End Role="Produto" EntitySet="Produtoes" />
+      <End Role="CarrinhoUsuario" EntitySet="CarrinhoUsuarios" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="NivelUsuario">
@@ -36,6 +47,54 @@
       </Principal>
       <Dependent Role="Usuario">
         <PropertyRef Name="Usua_IdNivelUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="CodigoProduto" />
+    </Key>
+    <Property Name="CodigoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeProduto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PesoVolumeProduto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="PrecoProduto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="EstoqueProduto" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+    <NavigationProperty Name="CarrinhoUsuarios" Relationship="EcommerceDBModel.Carrinho_CodigoProduto" FromRole="Produto" ToRole="CarrinhoUsuario" />
+  </EntityType>
+  <EntityType Name="CarrinhoUsuario">
+    <Key>
+      <PropertyRef Name="IdCarrinho" />
+    </Key>
+    <Property Name="IdCarrinho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoProduto" Type="Int32" Nullable="false" />
+    <Property Name="QuantidadeProdutos" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PrecoTotal" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Carrinho_IdUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="EcommerceDBModel.Carrinho_IdUsuario" FromRole="CarrinhoUsuario" ToRole="Usuario" />
+    <Property Name="Carrinho_CodigoProduto" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Produto" Relationship="EcommerceDBModel.Carrinho_CodigoProduto" FromRole="CarrinhoUsuario" ToRole="Produto" />
+  </EntityType>
+  <Association Name="Carrinho_IdUsuario">
+    <End Type="EcommerceDBModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="EcommerceDBModel.CarrinhoUsuario" Role="CarrinhoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="CarrinhoUsuario">
+        <PropertyRef Name="Carrinho_IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Carrinho_CodigoProduto">
+    <End Type="EcommerceDBModel.Produto" Role="Produto" Multiplicity="1" />
+    <End Type="EcommerceDBModel.CarrinhoUsuario" Role="CarrinhoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produto">
+        <PropertyRef Name="CodigoProduto" />
+      </Principal>
+      <Dependent Role="CarrinhoUsuario">
+        <PropertyRef Name="Carrinho_CodigoProduto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

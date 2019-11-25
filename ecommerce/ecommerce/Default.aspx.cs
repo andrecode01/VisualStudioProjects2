@@ -13,8 +13,46 @@ namespace ecommerce
         {
 
             if (!Page.User.Identity.IsAuthenticated)
-                Response.Redirect("~/Login.aspx");
+               Response.Redirect("~/Login.aspx");
 
+            if (!Page.IsPostBack)
+            {
+                popularLvProdutos();
+
+                var qsAdd = Request.QueryString["add"];
+
+                int idU = Convert.ToInt32(Page.User.Identity.Name);
+
+                if (qsAdd != null)
+                {
+                    int CodP = Convert.ToInt32(qsAdd);
+
+                    if(Produto.ObterProdutoByCodigo(CodP) != null)
+                        CarrinhoUsuario.AdicionarProdutoCarrinho(idU, CodP);
+                }
+
+            }
+                
+
+            carregarUsuarioAutenticado();
+
+        }
+
+        private void carregarUsuarioAutenticado()
+        { 
+            int id = Convert.ToInt32(Page.User.Identity.Name);
+            Usuario userAuth = Usuario.ObterUsuarioById(id);
+
+            if (userAuth != null)
+            {
+                NomeAuth.InnerHtml = userAuth.NomeUsuario;
+            }
+        }
+
+        private void popularLvProdutos()
+        {
+            lvProdutos.DataSource = Produto.ObterProdutos();
+            lvProdutos.DataBind();
         }
     }
 }

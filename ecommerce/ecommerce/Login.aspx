@@ -20,7 +20,7 @@
         <ItemTemplate>
             <li>
                Email : <%# Eval("EmailUsuario") %><br />
-               Nome  : <%# Eval("NomeUsuario") %> [<span><%# DataBinder.Eval(Container.DataItem, "NivelUsuario.NomeNivelUsuario") %></span>]
+               Nome  : <%# Eval("NomeUsuario") %>
 
                 <a href="Login.aspx?login=<%# Eval("IdUsuario") %>">Login</a>
             </li>

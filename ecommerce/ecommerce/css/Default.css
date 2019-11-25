@@ -1,0 +1,51 @@
+﻿* 
+{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: sans-serif;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.p-container
+{
+    width: 80%;
+    margin: 20px auto;
+}
+
+.p-item 
+{
+    width: 10em;
+    text-align: center;
+    display: inline-block;
+    margin: 10px 1em;
+    padding: 5px;
+    background: #ffdd0075;
+    box-shadow: -2px 2px 3px 0 #444;
+}
+
+nav
+{
+    width: 100%;
+    border: 1px solid;
+    background: #444;
+    text-align: right;
+}
+
+nav .car 
+{
+    width: 25%;
+    color: #fff;
+    background: #666;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #fff;
+    margin: 0 75%;
+}
+
+    nav .car p:nth-child(2)
+    {
+        color: #00ff21;
+    }

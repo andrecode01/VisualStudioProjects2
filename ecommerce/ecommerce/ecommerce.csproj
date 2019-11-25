@@ -108,28 +108,29 @@
     <Content Include="App_Data\EcommerceDB_log.ldf">
       <DependentUpon>EcommerceDB.mdf</DependentUpon>
     </Content>
+    <Content Include="css\Default.css" />
     <Content Include="css\Login.css" />
-    <Content Include="EcommerceEntities.Context.tt">
+    <Content Include="EcommerceDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommerceEntities.edmx</DependentUpon>
-      <LastGenOutput>EcommerceEntities.Context.cs</LastGenOutput>
+      <DependentUpon>EcommerceDBEntities.edmx</DependentUpon>
+      <LastGenOutput>EcommerceDBEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EcommerceEntities.tt">
+    <Content Include="EcommerceDBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommerceEntities.edmx</DependentUpon>
-      <LastGenOutput>EcommerceEntities.cs</LastGenOutput>
+      <DependentUpon>EcommerceDBEntities.edmx</DependentUpon>
+      <LastGenOutput>EcommerceDBEntities.cs</LastGenOutput>
     </Content>
     <Content Include="imgs\wallpaper.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="EcommerceEntities.edmx">
+    <EntityDeploy Include="EcommerceDBEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EcommerceEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>EcommerceDBEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="EcommerceEntities.edmx.diagram">
-      <DependentUpon>EcommerceEntities.edmx</DependentUpon>
+    <Content Include="EcommerceDBEntities.edmx.diagram">
+      <DependentUpon>EcommerceDBEntities.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -146,27 +147,35 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EcommerceEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceEntities.Context.tt</DependentUpon>
+    <Compile Include="CarrinhoUsuario.cs">
+      <DependentUpon>EcommerceDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="EcommerceEntities.cs">
+    <Compile Include="CarrinhoUsuarioDAO.cs" />
+    <Compile Include="EcommerceDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceEntities.tt</DependentUpon>
+      <DependentUpon>EcommerceDBEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EcommerceEntities.Designer.cs">
+    <Compile Include="EcommerceDBEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceEntities.edmx</DependentUpon>
+      <DependentUpon>EcommerceDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EcommerceDBEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EcommerceDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="NivelUsuario.cs">
-      <DependentUpon>EcommerceEntities.tt</DependentUpon>
+      <DependentUpon>EcommerceDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="NivelUsuarioDAO.cs" />
+    <Compile Include="Produto.cs">
+      <DependentUpon>EcommerceDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProdutoDAO.cs" />
     <Compile Include="Usuario.cs">
-      <DependentUpon>EcommerceEntities.tt</DependentUpon>
+      <DependentUpon>EcommerceDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UsuarioDAO.cs" />
     <Compile Include="Default.aspx.cs">

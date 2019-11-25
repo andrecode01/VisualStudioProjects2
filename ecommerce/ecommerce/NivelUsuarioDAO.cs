@@ -5,35 +5,23 @@ namespace ecommerce
 {
     public partial class NivelUsuario
     {
-
-        public static void criarNiveisDeUsuarios()
+        
+        public static void CriarNivelUsuario(string n)
         {
-
-            NivelUsuario cliente = new NivelUsuario()
+            NivelUsuario nu = new NivelUsuario();
+            using (var ctx = new EcommerceDBEntitiesNew())
             {
-                NomeNivelUsuario = "Cliente"
-            };
-
-            NivelUsuario adm = new NivelUsuario()
-            {
-                NomeNivelUsuario = "Admin"
-            };
-
-            using (var ctx = new EcommerceDBEntities())
-            {
-                List<NivelUsuario> nivelUsuarios = (from u in ctx.NivelUsuarios select u).ToList();
-                ctx.NivelUsuarios.Add(cliente);
-                ctx.NivelUsuarios.Add(adm);
+                nu.NomeNivelUsuario = n;
+                ctx.NivelUsuarios.Add(nu);
                 ctx.SaveChanges();
             }
-
         }
 
         public static NivelUsuario ObterNivelUsuarioByNome (string nomeNivel)
         {
             NivelUsuario nivel;
 
-            using (var ctx = new EcommerceDBEntities())
+            using (var ctx = new EcommerceDBEntitiesNew())
             {
                 List<NivelUsuario> nivelUsuarios = (from u in ctx.NivelUsuarios select u).ToList();
                 nivel = nivelUsuarios.FirstOrDefault(j => j.NomeNivelUsuario == nomeNivel);

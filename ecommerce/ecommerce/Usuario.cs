@@ -14,12 +14,20 @@ namespace ecommerce
     
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.CarrinhoUsuarios = new HashSet<CarrinhoUsuario>();
+        }
+    
         public int IdUsuario { get; set; }
         public string NomeUsuario { get; set; }
         public string EmailUsuario { get; set; }
         public string SenhaUsuario { get; set; }
-        public Nullable<int> Usua_IdNivelUsuario { get; set; }
+        public int Usua_IdNivelUsuario { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarrinhoUsuario> CarrinhoUsuarios { get; set; }
         public virtual NivelUsuario NivelUsuario { get; set; }
     }
 }
