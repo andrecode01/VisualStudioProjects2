@@ -14,13 +14,19 @@ namespace ecommerce
     
     public partial class CarrinhoUsuario
     {
-        public int IdCarrinho { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CarrinhoUsuario()
+        {
+            this.CarrinhoUsuarioProdutoes = new HashSet<CarrinhoUsuarioProduto>();
+        }
+    
+        public int IdCarrinhoUsuario { get; set; }
         public decimal QuantidadeProdutos { get; set; }
         public decimal PrecoTotal { get; set; }
         public int Carrinho_IdUsuario { get; set; }
-        public int Carrinho_CodigoProduto { get; set; }
     
-        public virtual Produto Produto { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarrinhoUsuarioProduto> CarrinhoUsuarioProdutoes { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace ecommerce
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produto()
         {
-            this.CarrinhoUsuarios = new HashSet<CarrinhoUsuario>();
+            this.ProdutoItems = new HashSet<ProdutoItem>();
         }
     
         public int CodigoProduto { get; set; }
@@ -27,6 +27,6 @@ namespace ecommerce
         public decimal EstoqueProduto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarrinhoUsuario> CarrinhoUsuarios { get; set; }
+        public virtual ICollection<ProdutoItem> ProdutoItems { get; set; }
     }
 }
