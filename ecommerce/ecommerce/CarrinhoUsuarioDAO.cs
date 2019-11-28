@@ -12,7 +12,7 @@ namespace ecommerce
         {
             List<CarrinhoUsuario> cars = new List<CarrinhoUsuario>();
 
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 return cars = ctx.CarrinhoUsuarios.ToList();
             }
@@ -25,9 +25,9 @@ namespace ecommerce
 
             if (cars.Count > 0 )
             {
-                if (cars.FirstOrDefault(p => p.Carrinho_CodigoProduto == idP) != null)
+                if (cars.FirstOrDefault(p => p.Carrinho_IdUsuario == idU) != null)
                 {
-                    var car = cars.FirstOrDefault(p => p.Carrinho_CodigoProduto == idP);
+                    var car = cars.FirstOrDefault(p => p.Carrinho_IdUsuario == idP);
                     car.QuantidadeProdutos++;
                     Produto.ObterProdutoByCodigo(idP).EstoqueProduto--;
                     car.PrecoTotal = Produto.ObterPrecoByCodigo(idP) * car.QuantidadeProdutos;
@@ -44,11 +44,10 @@ namespace ecommerce
             CarrinhoUsuario car = new CarrinhoUsuario();
 
             car.Carrinho_IdUsuario = idU;
-            car.Carrinho_CodigoProduto = codP;
             car.PrecoTotal = Produto.ObterPrecoByCodigo(codP);
             car.QuantidadeProdutos = 1;
 
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 ctx.CarrinhoUsuarios.Add(car);
                 ctx.SaveChanges();

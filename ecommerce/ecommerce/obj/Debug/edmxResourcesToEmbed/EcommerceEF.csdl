@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcommerceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarrinhoUsuario">
+    <Key>
+      <PropertyRef Name="IdCarrinhoUsuario" />
+    </Key>
+    <Property Name="IdCarrinhoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuantidadeProdutos" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PrecoTotal" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Carrinho_IdUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Carrinho_IdUsuario" FromRole="CarrinhoUsuario" ToRole="Usuario" />
+    <NavigationProperty Name="CarrinhoUsuarioProdutoes" Relationship="Self.IdCarrinhoUsuario" FromRole="CarrinhoUsuario" ToRole="CarrinhoUsuarioProduto" />
+  </EntityType>
+  <EntityType Name="CarrinhoUsuarioProduto">
+    <Key>
+      <PropertyRef Name="IdCarrinhoUsuarioProduto" />
+    </Key>
+    <Property Name="IdCarrinhoUsuarioProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCarrinhoUsuario" Type="Int32" Nullable="false" />
+    <Property Name="CodigoProdutoItem" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarrinhoUsuario" Relationship="Self.IdCarrinhoUsuario" FromRole="CarrinhoUsuarioProduto" ToRole="CarrinhoUsuario" />
+    <NavigationProperty Name="ProdutoItem" Relationship="Self.CodigoProdutoItem" FromRole="CarrinhoUsuarioProduto" ToRole="ProdutoItem" />
+  </EntityType>
+  <EntityType Name="NivelUsuario">
+    <Key>
+      <PropertyRef Name="IdNivelUsuario" />
+    </Key>
+    <Property Name="IdNivelUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeNivelUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.IdNivelUsuario" FromRole="NivelUsuario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="CodigoProduto" />
+    </Key>
+    <Property Name="CodigoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeProduto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PesoVolumeProduto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PrecoProduto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="EstoqueProduto" Type="Decimal" Precision="10" Scale="0" Nullable="true" DefaultValue="0" />
+    <NavigationProperty Name="ProdutoItems" Relationship="Self.CodigoProduto" FromRole="Produto" ToRole="ProdutoItem" />
+  </EntityType>
+  <EntityType Name="ProdutoItem">
+    <Key>
+      <PropertyRef Name="CodigoProdutoItem" />
+    </Key>
+    <Property Name="CodigoProdutoItem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoProduto" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarrinhoUsuarioProdutoes" Relationship="Self.CodigoProdutoItem" FromRole="ProdutoItem" ToRole="CarrinhoUsuarioProduto" />
+    <NavigationProperty Name="Produto" Relationship="Self.CodigoProduto" FromRole="ProdutoItem" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SenhaUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Usua_IdNivelUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarrinhoUsuarios" Relationship="Self.Carrinho_IdUsuario" FromRole="Usuario" ToRole="CarrinhoUsuario" />
+    <NavigationProperty Name="NivelUsuario" Relationship="Self.IdNivelUsuario" FromRole="Usuario" ToRole="NivelUsuario" />
+  </EntityType>
+  <Association Name="Carrinho_IdUsuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="CarrinhoUsuario" Type="Self.CarrinhoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="CarrinhoUsuario">
+        <PropertyRef Name="Carrinho_IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IdCarrinhoUsuario">
+    <End Role="CarrinhoUsuario" Type="Self.CarrinhoUsuario" Multiplicity="1" />
+    <End Role="CarrinhoUsuarioProduto" Type="Self.CarrinhoUsuarioProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarrinhoUsuario">
+        <PropertyRef Name="IdCarrinhoUsuario" />
+      </Principal>
+      <Dependent Role="CarrinhoUsuarioProduto">
+        <PropertyRef Name="IdCarrinhoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CodigoProdutoItem">
+    <End Role="ProdutoItem" Type="Self.ProdutoItem" Multiplicity="1" />
+    <End Role="CarrinhoUsuarioProduto" Type="Self.CarrinhoUsuarioProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProdutoItem">
+        <PropertyRef Name="CodigoProdutoItem" />
+      </Principal>
+      <Dependent Role="CarrinhoUsuarioProduto">
+        <PropertyRef Name="CodigoProdutoItem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IdNivelUsuario">
+    <End Role="NivelUsuario" Type="Self.NivelUsuario" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelUsuario">
+        <PropertyRef Name="IdNivelUsuario" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Usua_IdNivelUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CodigoProduto">
+    <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+    <End Role="ProdutoItem" Type="Self.ProdutoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produto">
+        <PropertyRef Name="CodigoProduto" />
+      </Principal>
+      <Dependent Role="ProdutoItem">
+        <PropertyRef Name="CodigoProduto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EcommerceDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarrinhoUsuarios" EntityType="Self.CarrinhoUsuario" />
+    <EntitySet Name="CarrinhoUsuarioProdutoes" EntityType="Self.CarrinhoUsuarioProduto" />
+    <EntitySet Name="NivelUsuarios" EntityType="Self.NivelUsuario" />
+    <EntitySet Name="Produtoes" EntityType="Self.Produto" />
+    <EntitySet Name="ProdutoItems" EntityType="Self.ProdutoItem" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="Carrinho_IdUsuario" Association="Self.Carrinho_IdUsuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="CarrinhoUsuario" EntitySet="CarrinhoUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="IdCarrinhoUsuario" Association="Self.IdCarrinhoUsuario">
+      <End Role="CarrinhoUsuario" EntitySet="CarrinhoUsuarios" />
+      <End Role="CarrinhoUsuarioProduto" EntitySet="CarrinhoUsuarioProdutoes" />
+    </AssociationSet>
+    <AssociationSet Name="CodigoProdutoItem" Association="Self.CodigoProdutoItem">
+      <End Role="ProdutoItem" EntitySet="ProdutoItems" />
+      <End Role="CarrinhoUsuarioProduto" EntitySet="CarrinhoUsuarioProdutoes" />
+    </AssociationSet>
+    <AssociationSet Name="IdNivelUsuario" Association="Self.IdNivelUsuario">
+      <End Role="NivelUsuario" EntitySet="NivelUsuarios" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="CodigoProduto" Association="Self.CodigoProduto">
+      <End Role="Produto" EntitySet="Produtoes" />
+      <End Role="ProdutoItem" EntitySet="ProdutoItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -13,7 +13,7 @@ namespace ecommerce
         public static List<Usuario> ObterUsuarios()
         {
             List<Usuario> usuarios;
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 usuarios = ctx.Usuarios.ToList();
             }
@@ -22,7 +22,7 @@ namespace ecommerce
   
         public static Usuario ObterUsuarioById(int id)
         {
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 List<Usuario> ListaUsuarios = (from u in ctx.Usuarios select u).ToList();
                 var user = ListaUsuarios.FirstOrDefault(u => u.IdUsuario == id);
@@ -34,7 +34,7 @@ namespace ecommerce
         {
             if (user != null)
             {
-                using (var ctx = new EcommerceDBEntitiesNew())
+                using (var ctx = new EcommerceDBEntities1())
                 {
                     ctx.Usuarios.Add(user);
                     ctx.SaveChanges();

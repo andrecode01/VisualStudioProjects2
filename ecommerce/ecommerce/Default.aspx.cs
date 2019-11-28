@@ -15,8 +15,13 @@ namespace ecommerce
             if (!Page.User.Identity.IsAuthenticated)
                Response.Redirect("~/Login.aspx");
 
+
+
             if (!Page.IsPostBack)
             {
+                if (Produto.ObterProdutos().Count == 0)
+                    Produto.CriarProdutosDefault(10);
+
                 popularLvProdutos();
 
                 var qsAdd = Request.QueryString["add"];

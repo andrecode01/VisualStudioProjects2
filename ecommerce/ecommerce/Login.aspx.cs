@@ -16,7 +16,7 @@ namespace ecommerce
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            resetarBD();
+            //resetarBD();
 
             var qsLogar = Request.QueryString["login"];
 
@@ -35,7 +35,7 @@ namespace ecommerce
 
         private void resetarBD()
         {
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
 
                 while (criarBd)

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EcommerceDBModelStoreContainer" CdmEntityContainer="EcommerceDBEntities1">
+    <EntitySetMapping Name="CarrinhoUsuarios">
+      <EntityTypeMapping TypeName="EcommerceDBModel.CarrinhoUsuario">
+        <MappingFragment StoreEntitySet="CarrinhoUsuario">
+          <ScalarProperty Name="IdCarrinhoUsuario" ColumnName="IdCarrinhoUsuario" />
+          <ScalarProperty Name="QuantidadeProdutos" ColumnName="QuantidadeProdutos" />
+          <ScalarProperty Name="PrecoTotal" ColumnName="PrecoTotal" />
+          <ScalarProperty Name="Carrinho_IdUsuario" ColumnName="Carrinho_IdUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrinhoUsuarioProdutoes">
+      <EntityTypeMapping TypeName="EcommerceDBModel.CarrinhoUsuarioProduto">
+        <MappingFragment StoreEntitySet="CarrinhoUsuarioProduto">
+          <ScalarProperty Name="IdCarrinhoUsuarioProduto" ColumnName="IdCarrinhoUsuarioProduto" />
+          <ScalarProperty Name="IdCarrinhoUsuario" ColumnName="IdCarrinhoUsuario" />
+          <ScalarProperty Name="CodigoProdutoItem" ColumnName="CodigoProdutoItem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NivelUsuarios">
+      <EntityTypeMapping TypeName="EcommerceDBModel.NivelUsuario">
+        <MappingFragment StoreEntitySet="NivelUsuario">
+          <ScalarProperty Name="IdNivelUsuario" ColumnName="IdNivelUsuario" />
+          <ScalarProperty Name="NomeNivelUsuario" ColumnName="NomeNivelUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produtoes">
+      <EntityTypeMapping TypeName="EcommerceDBModel.Produto">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
+          <ScalarProperty Name="NomeProduto" ColumnName="NomeProduto" />
+          <ScalarProperty Name="PesoVolumeProduto" ColumnName="PesoVolumeProduto" />
+          <ScalarProperty Name="PrecoProduto" ColumnName="PrecoProduto" />
+          <ScalarProperty Name="EstoqueProduto" ColumnName="EstoqueProduto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProdutoItems">
+      <EntityTypeMapping TypeName="EcommerceDBModel.ProdutoItem">
+        <MappingFragment StoreEntitySet="ProdutoItem">
+          <ScalarProperty Name="CodigoProdutoItem" ColumnName="CodigoProdutoItem" />
+          <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="EcommerceDBModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="NomeUsuario" ColumnName="NomeUsuario" />
+          <ScalarProperty Name="EmailUsuario" ColumnName="EmailUsuario" />
+          <ScalarProperty Name="SenhaUsuario" ColumnName="SenhaUsuario" />
+          <ScalarProperty Name="Usua_IdNivelUsuario" ColumnName="Usua_IdNivelUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -11,34 +11,43 @@ namespace ecommerce
         public static List<Produto> ObterProdutos()
         {
             List<Produto> produtos = new List<Produto>();
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 produtos = ctx.Produtoes.ToList();
             }
 
-            if (produtos.Count() == 0)
-                CriarProdutosDefault();
-
             return produtos;
         }
 
-        internal static void CriarProdutosDefault()
+        public static void AtualizarEstoque(int codP)
+        {
+            using (var ctx = new EcommerceDBEntities1())
+            {
+                ctx.Produtoes.FirstOrDefault(p => p.CodigoProduto == codP).EstoqueProduto++;
+                ctx.SaveChanges();
+            }
+        }
+
+        internal static void CriarProdutosDefault(int qtd)
         {
             Produto p = new Produto();
 
             for(var i = 1; i <= 5; i++)
             {
-                p.NomeProduto = "Produto" + i;
+                p.CodigoProduto = i + 1000;
+                p.NomeProduto = "Produto " + i;
                 p.PesoVolumeProduto = i * 5;
                 p.PrecoProduto = i * 10;
-                p.EstoqueProduto = i * i;
                 CadastrarProduto(p);
+
+                for(var j = 0;  j < qtd; j++)
+                    ProdutoItem.AdicionarProdutoItemEstoque(p.CodigoProduto);
             }
         }
 
         public static void CadastrarProduto(Produto p)
         {
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 ctx.Produtoes.Add(p);
                 ctx.SaveChanges();

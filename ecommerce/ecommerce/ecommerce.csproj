@@ -154,6 +154,7 @@
     <Compile Include="CarrinhoUsuarioProduto.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="CarrinhoUsuarioProdutoDAO.cs" />
     <Compile Include="EcommerceEF.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +181,7 @@
     <Compile Include="ProdutoItem.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProdutoItemDAO.cs" />
     <Compile Include="Usuario.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>

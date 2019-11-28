@@ -9,7 +9,7 @@ namespace ecommerce
         public static void CriarNivelUsuario(string n)
         {
             NivelUsuario nu = new NivelUsuario();
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 nu.NomeNivelUsuario = n;
                 ctx.NivelUsuarios.Add(nu);
@@ -21,7 +21,7 @@ namespace ecommerce
         {
             NivelUsuario nivel;
 
-            using (var ctx = new EcommerceDBEntitiesNew())
+            using (var ctx = new EcommerceDBEntities1())
             {
                 List<NivelUsuario> nivelUsuarios = (from u in ctx.NivelUsuarios select u).ToList();
                 nivel = nivelUsuarios.FirstOrDefault(j => j.NomeNivelUsuario == nomeNivel);
