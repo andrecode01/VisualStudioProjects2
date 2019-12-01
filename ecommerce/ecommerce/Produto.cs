@@ -26,8 +26,10 @@ namespace ecommerce
         public decimal PesoVolumeProduto { get; set; }
         public decimal PrecoProduto { get; set; }
         public Nullable<decimal> EstoqueProduto { get; set; }
+        public int Produto_IdSubcategoria { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProdutoItem> ProdutoItems { get; set; }
+        public virtual Subcategoria Subcategoria { get; set; }
     }
 }

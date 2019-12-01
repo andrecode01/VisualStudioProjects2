@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="99890c4ca744461eb307e5812a32b63d" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="EcommerceDBModel.CarrinhoUsuario" Width="2" PointX="3.75" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="99890c4ca744461eb307e5812a32b63d" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="EcommerceDBModel.CarrinhoUsuario" Width="2" PointX="3.5" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceDBModel.CarrinhoUsuarioProduto" Width="2" PointX="3.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommerceDBModel.NivelUsuario" Width="2.125" PointX="1" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommerceDBModel.Produto" Width="2" PointX="6.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceDBModel.NivelUsuario" Width="2.125" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceDBModel.Produto" Width="2" PointX="6.375" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceDBModel.ProdutoItem" Width="1.875" PointX="6.5" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommerceDBModel.Usuario" Width="2.125" PointX="1" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceDBModel.Usuario" Width="2.125" PointX="0.5" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="EcommerceDBModel.Carrinho_IdUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="EcommerceDBModel.IdCarrinhoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="EcommerceDBModel.CodigoProdutoItem" ManuallyRouted="false" />
         <AssociationConnector Association="EcommerceDBModel.IdNivelUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="EcommerceDBModel.CodigoProduto" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EcommerceDBModel.Subcategoria" Width="1.5" PointX="9.125" PointY="3" />
+        <AssociationConnector Association="EcommerceDBModel.Produto_IdSubcategoria" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

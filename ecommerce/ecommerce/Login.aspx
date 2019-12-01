@@ -20,7 +20,7 @@
         <ItemTemplate>
             <li>
                Email : <%# Eval("EmailUsuario") %><br />
-               Nome  : <%# Eval("NomeUsuario") %>
+               Nome  : <%# Eval("NomeUsuario") %>[<span><%# Eval("getNomeNivel") %></span>]
 
                 <a href="Login.aspx?login=<%# Eval("IdUsuario") %>">Login</a>
             </li>

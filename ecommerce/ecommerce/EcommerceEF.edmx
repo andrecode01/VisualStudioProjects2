@@ -38,6 +38,7 @@
           <Property Name="PesoVolumeProduto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="PrecoProduto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="EstoqueProduto" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Produto_IdSubcategoria" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProdutoItem">
           <Key>
@@ -45,6 +46,14 @@
           </Key>
           <Property Name="CodigoProdutoItem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodigoProduto" Type="int" Nullable="false" />
+          <Property Name="SituacaoItem" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="IdSubcategoria" />
+          </Key>
+          <Property Name="IdSubcategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeSubcategoria" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -116,12 +125,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Produto_IdSubcategoria">
+          <End Role="Subcategoria" Type="Self.Subcategoria" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="IdSubcategoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Produto_IdSubcategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EcommerceDBModelStoreContainer">
           <EntitySet Name="CarrinhoUsuario" EntityType="Self.CarrinhoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarrinhoUsuarioProduto" EntityType="Self.CarrinhoUsuarioProduto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelUsuario" EntityType="Self.NivelUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProdutoItem" EntityType="Self.ProdutoItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Carrinho_IdUsuario" Association="Self.Carrinho_IdUsuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -142,6 +164,10 @@
           <AssociationSet Name="IdNivelUsuario" Association="Self.IdNivelUsuario">
             <End Role="NivelUsuario" EntitySet="NivelUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Produto_IdSubcategoria" Association="Self.Produto_IdSubcategoria">
+            <End Role="Subcategoria" EntitySet="Subcategoria" />
+            <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -187,6 +213,8 @@
           <Property Name="PrecoProduto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="EstoqueProduto" Type="Decimal" Precision="10" Scale="0" Nullable="true" DefaultValue="0" />
           <NavigationProperty Name="ProdutoItems" Relationship="Self.CodigoProduto" FromRole="Produto" ToRole="ProdutoItem" />
+          <Property Name="Produto_IdSubcategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subcategoria" Relationship="EcommerceDBModel.Produto_IdSubcategoria" FromRole="Produto" ToRole="Subcategoria" />
         </EntityType>
         <EntityType Name="ProdutoItem">
           <Key>
@@ -196,6 +224,7 @@
           <Property Name="CodigoProduto" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarrinhoUsuarioProdutoes" Relationship="Self.CodigoProdutoItem" FromRole="ProdutoItem" ToRole="CarrinhoUsuarioProduto" />
           <NavigationProperty Name="Produto" Relationship="Self.CodigoProduto" FromRole="ProdutoItem" ToRole="Produto" />
+          <Property Name="SituacaoItem" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -296,7 +325,32 @@
             <End Role="Produto" EntitySet="Produtoes" />
             <End Role="ProdutoItem" EntitySet="ProdutoItems" />
           </AssociationSet>
+          <EntitySet Name="Subcategorias" EntityType="EcommerceDBModel.Subcategoria" />
+          <AssociationSet Name="Produto_IdSubcategoria" Association="EcommerceDBModel.Produto_IdSubcategoria">
+            <End Role="Subcategoria" EntitySet="Subcategorias" />
+            <End Role="Produto" EntitySet="Produtoes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="IdSubcategoria" />
+          </Key>
+          <Property Name="IdSubcategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeSubcategoria" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produtoes" Relationship="EcommerceDBModel.Produto_IdSubcategoria" FromRole="Subcategoria" ToRole="Produto" />
+        </EntityType>
+        <Association Name="Produto_IdSubcategoria">
+          <End Type="EcommerceDBModel.Subcategoria" Role="Subcategoria" Multiplicity="1" />
+          <End Type="EcommerceDBModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="IdSubcategoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Produto_IdSubcategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -333,6 +387,7 @@
           <EntitySetMapping Name="Produtoes">
             <EntityTypeMapping TypeName="EcommerceDBModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="Produto_IdSubcategoria" ColumnName="Produto_IdSubcategoria" />
                 <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
                 <ScalarProperty Name="NomeProduto" ColumnName="NomeProduto" />
                 <ScalarProperty Name="PesoVolumeProduto" ColumnName="PesoVolumeProduto" />
@@ -344,6 +399,7 @@
           <EntitySetMapping Name="ProdutoItems">
             <EntityTypeMapping TypeName="EcommerceDBModel.ProdutoItem">
               <MappingFragment StoreEntitySet="ProdutoItem">
+                <ScalarProperty Name="SituacaoItem" ColumnName="SituacaoItem" />
                 <ScalarProperty Name="CodigoProdutoItem" ColumnName="CodigoProdutoItem" />
                 <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
               </MappingFragment>
@@ -357,6 +413,14 @@
                 <ScalarProperty Name="EmailUsuario" ColumnName="EmailUsuario" />
                 <ScalarProperty Name="SenhaUsuario" ColumnName="SenhaUsuario" />
                 <ScalarProperty Name="Usua_IdNivelUsuario" ColumnName="Usua_IdNivelUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcategorias">
+            <EntityTypeMapping TypeName="EcommerceDBModel.Subcategoria">
+              <MappingFragment StoreEntitySet="Subcategoria">
+                <ScalarProperty Name="NomeSubcategoria" ColumnName="NomeSubcategoria" />
+                <ScalarProperty Name="IdSubcategoria" ColumnName="IdSubcategoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

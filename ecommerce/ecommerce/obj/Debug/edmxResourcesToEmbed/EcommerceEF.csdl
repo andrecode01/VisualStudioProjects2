@@ -39,6 +39,8 @@
     <Property Name="PrecoProduto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="EstoqueProduto" Type="Decimal" Precision="10" Scale="0" Nullable="true" DefaultValue="0" />
     <NavigationProperty Name="ProdutoItems" Relationship="Self.CodigoProduto" FromRole="Produto" ToRole="ProdutoItem" />
+    <Property Name="Produto_IdSubcategoria" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subcategoria" Relationship="EcommerceDBModel.Produto_IdSubcategoria" FromRole="Produto" ToRole="Subcategoria" />
   </EntityType>
   <EntityType Name="ProdutoItem">
     <Key>
@@ -48,6 +50,7 @@
     <Property Name="CodigoProduto" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CarrinhoUsuarioProdutoes" Relationship="Self.CodigoProdutoItem" FromRole="ProdutoItem" ToRole="CarrinhoUsuarioProduto" />
     <NavigationProperty Name="Produto" Relationship="Self.CodigoProduto" FromRole="ProdutoItem" ToRole="Produto" />
+    <Property Name="SituacaoItem" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -148,5 +151,30 @@
       <End Role="Produto" EntitySet="Produtoes" />
       <End Role="ProdutoItem" EntitySet="ProdutoItems" />
     </AssociationSet>
+    <EntitySet Name="Subcategorias" EntityType="EcommerceDBModel.Subcategoria" />
+    <AssociationSet Name="Produto_IdSubcategoria" Association="EcommerceDBModel.Produto_IdSubcategoria">
+      <End Role="Subcategoria" EntitySet="Subcategorias" />
+      <End Role="Produto" EntitySet="Produtoes" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Subcategoria">
+    <Key>
+      <PropertyRef Name="IdSubcategoria" />
+    </Key>
+    <Property Name="IdSubcategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeSubcategoria" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Produtoes" Relationship="EcommerceDBModel.Produto_IdSubcategoria" FromRole="Subcategoria" ToRole="Produto" />
+  </EntityType>
+  <Association Name="Produto_IdSubcategoria">
+    <End Type="EcommerceDBModel.Subcategoria" Role="Subcategoria" Multiplicity="1" />
+    <End Type="EcommerceDBModel.Produto" Role="Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategoria">
+        <PropertyRef Name="IdSubcategoria" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="Produto_IdSubcategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -49,3 +49,9 @@ nav .car
     {
         color: #00ff21;
     }
+
+#NomeNivelAuth {
+    color: #ffdd00;
+    text-transform: uppercase;
+    font-weight: bold;
+}

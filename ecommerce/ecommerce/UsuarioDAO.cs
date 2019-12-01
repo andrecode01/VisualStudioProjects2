@@ -9,7 +9,19 @@ namespace ecommerce
 {
     public partial class Usuario
     {
-
+        public string getNomeNivel
+        {
+            get
+            {
+                using (var ctx = new EcommerceDBEntities1())
+                {
+                    return
+                        (ctx.NivelUsuarios.FirstOrDefault
+                        (n => n.IdNivelUsuario == this.Usua_IdNivelUsuario).NomeNivelUsuario);
+                }
+                
+            }
+        }
         public static List<Usuario> ObterUsuarios()
         {
             List<Usuario> usuarios;

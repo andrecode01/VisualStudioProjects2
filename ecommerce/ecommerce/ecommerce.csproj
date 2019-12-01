@@ -104,6 +104,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adm\CadastrarProduto.aspx" />
+    <Content Include="adm\GerenciarProdutos.aspx" />
     <Content Include="App_Data\EcommerceDB.mdf" />
     <Content Include="App_Data\EcommerceDB_log.ldf">
       <DependentUpon>EcommerceDB.mdf</DependentUpon>
@@ -142,11 +144,27 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="PerfilProduto.aspx" />
+    <Content Include="PerfilUsuario.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adm\CadastrarProduto.aspx.cs">
+      <DependentUpon>CadastrarProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\CadastrarProduto.aspx.designer.cs">
+      <DependentUpon>CadastrarProduto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\GerenciarProdutos.aspx.cs">
+      <DependentUpon>GerenciarProdutos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\GerenciarProdutos.aspx.designer.cs">
+      <DependentUpon>GerenciarProdutos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CarrinhoUsuario.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
@@ -174,6 +192,20 @@
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
     <Compile Include="NivelUsuarioDAO.cs" />
+    <Compile Include="PerfilProduto.aspx.cs">
+      <DependentUpon>PerfilProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerfilProduto.aspx.designer.cs">
+      <DependentUpon>PerfilProduto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilUsuario.aspx.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerfilUsuario.aspx.designer.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Produto.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
@@ -182,6 +214,10 @@
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>
     <Compile Include="ProdutoItemDAO.cs" />
+    <Compile Include="Subcategoria.cs">
+      <DependentUpon>EcommerceEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubcategoriaDAO.cs" />
     <Compile Include="Usuario.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
     </Compile>

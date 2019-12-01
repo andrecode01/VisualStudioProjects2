@@ -19,9 +19,17 @@
 
     <div style="text-align: center;">
         
-     Bem-Vindo, <u id="NomeAuth" runat="server"></u> 
+     Bem-Vindo, <u id="NomeAuth" runat="server"></u>
+        [<span  id="NomeNivelAuth" runat="server"></span>]
      <h1>E-Commerce</h1>
     </div>
+
+    <a  id="btnGerenciarProdutos" 
+        href="/adm/GerenciarProdutos.aspx"  
+        target="_blank"
+        runat="server">
+        Gerenciar Produtos
+    </a>
 
     <nav>
         <div class="car">
@@ -29,15 +37,22 @@
             <p>R$ <span id="totalRsCar" runat="server">*</span></p>
         </div>
     </nav>
-
+    <p>
+        Filtrar por: <br />
+        <asp:ListView ID="lvFiltro" runat="server">
+            <ItemTemplate>
+                <a href="Default.aspx?filtro=<%# Eval("IdSubcategoria") %>" >#<%# Eval("NomeSubcategoria") %></a>
+            </ItemTemplate>
+        </asp:ListView>
+    </p>
     <div class="p-container">
         <asp:ListView id="lvProdutos" runat="server">
             <ItemTemplate>
-                <div class="p-item">
-                <p><%# Eval("NomeProduto") %></p>
-                <p><%# Eval("PrecoProduto") %></p>
-                <p><%# Eval("EstoqueProduto") %></p>
-                <a class="btnAddCar" href="Default.aspx?add=<%# Eval("CodigoProduto") %>">+<i class="fa fa-cart-plus"></i></a>
+                <div class="p-item" onclick="window.open('PerfilProduto.aspx?cod=<%#Eval("CodigoProduto") %>')" target="_blank">
+                    <p><%# Eval("NomeProduto") %></p>
+                    <p><%# Eval("PrecoProduto") %></p>
+                    <p><%# Eval("EstoqueProduto") %></p>
+                    <p>#<%# Eval("GetNomeSubcategoria") %></p>
                 </div>
             </ItemTemplate>
         </asp:ListView>

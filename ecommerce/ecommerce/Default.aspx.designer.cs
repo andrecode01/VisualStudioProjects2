@@ -31,6 +31,24 @@ namespace ecommerce {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl NomeAuth;
         
         /// <summary>
+        /// NomeNivelAuth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NomeNivelAuth;
+        
+        /// <summary>
+        /// btnGerenciarProdutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnGerenciarProdutos;
+        
+        /// <summary>
         /// qtdCar control.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,15 @@ namespace ecommerce {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl totalRsCar;
+        
+        /// <summary>
+        /// lvFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvFiltro;
         
         /// <summary>
         /// lvProdutos control.

@@ -31,6 +31,7 @@
     <EntitySetMapping Name="Produtoes">
       <EntityTypeMapping TypeName="EcommerceDBModel.Produto">
         <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="Produto_IdSubcategoria" ColumnName="Produto_IdSubcategoria" />
           <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
           <ScalarProperty Name="NomeProduto" ColumnName="NomeProduto" />
           <ScalarProperty Name="PesoVolumeProduto" ColumnName="PesoVolumeProduto" />
@@ -42,6 +43,7 @@
     <EntitySetMapping Name="ProdutoItems">
       <EntityTypeMapping TypeName="EcommerceDBModel.ProdutoItem">
         <MappingFragment StoreEntitySet="ProdutoItem">
+          <ScalarProperty Name="SituacaoItem" ColumnName="SituacaoItem" />
           <ScalarProperty Name="CodigoProdutoItem" ColumnName="CodigoProdutoItem" />
           <ScalarProperty Name="CodigoProduto" ColumnName="CodigoProduto" />
         </MappingFragment>
@@ -55,6 +57,14 @@
           <ScalarProperty Name="EmailUsuario" ColumnName="EmailUsuario" />
           <ScalarProperty Name="SenhaUsuario" ColumnName="SenhaUsuario" />
           <ScalarProperty Name="Usua_IdNivelUsuario" ColumnName="Usua_IdNivelUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subcategorias">
+      <EntityTypeMapping TypeName="EcommerceDBModel.Subcategoria">
+        <MappingFragment StoreEntitySet="Subcategoria">
+          <ScalarProperty Name="NomeSubcategoria" ColumnName="NomeSubcategoria" />
+          <ScalarProperty Name="IdSubcategoria" ColumnName="IdSubcategoria" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

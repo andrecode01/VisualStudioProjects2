@@ -22,6 +22,7 @@ namespace ecommerce
     
         public int CodigoProdutoItem { get; set; }
         public int CodigoProduto { get; set; }
+        public string SituacaoItem { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarrinhoUsuarioProduto> CarrinhoUsuarioProdutoes { get; set; }

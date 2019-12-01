@@ -8,48 +8,45 @@ namespace ecommerce
     public partial  class CarrinhoUsuario
     {
 
-        public static List<CarrinhoUsuario> ObterCarrinhosByUsuario(int id)
+        public static CarrinhoUsuario ObterCarrinhoByUsuario(int idU)
         {
-            List<CarrinhoUsuario> cars = new List<CarrinhoUsuario>();
-
             using (var ctx = new EcommerceDBEntities1())
             {
-                return cars = ctx.CarrinhoUsuarios.ToList();
+                var car = ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU);
+                return car;
             }
-
         }
 
-        public static void AdicionarProdutoCarrinho(int idU, int idP)
+        public static void criarCarrinho(int idU)
         {
-            var cars = ObterCarrinhosByUsuario(idU);
-
-            if (cars.Count > 0 )
-            {
-                if (cars.FirstOrDefault(p => p.Carrinho_IdUsuario == idU) != null)
-                {
-                    var car = cars.FirstOrDefault(p => p.Carrinho_IdUsuario == idP);
-                    car.QuantidadeProdutos++;
-                    Produto.ObterProdutoByCodigo(idP).EstoqueProduto--;
-                    car.PrecoTotal = Produto.ObterPrecoByCodigo(idP) * car.QuantidadeProdutos;
-                }
-                
-            }else
-             {
-                criarCarrinho(idU, idP);
-             }
-        }
-
-        private static void criarCarrinho(int idU, int codP)
-        {
-            CarrinhoUsuario car = new CarrinhoUsuario();
-
-            car.Carrinho_IdUsuario = idU;
-            car.PrecoTotal = Produto.ObterPrecoByCodigo(codP);
-            car.QuantidadeProdutos = 1;
-
             using (var ctx = new EcommerceDBEntities1())
             {
-                ctx.CarrinhoUsuarios.Add(car);
+                if(ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU) == null)
+                {
+                    CarrinhoUsuario car = new CarrinhoUsuario();
+                    car.QuantidadeProdutos = 0;
+                    car.PrecoTotal = 0;
+                    car.Carrinho_IdUsuario = idU;
+                    ctx.CarrinhoUsuarios.Add(car);
+                    ctx.SaveChanges();
+                } 
+            }
+        }
+
+        public static void AtualizarCarrinho(int idU, decimal valor, bool add)
+        {
+            using (var ctx = new EcommerceDBEntities1())
+            {
+                if (add)
+                {
+                    ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU).QuantidadeProdutos++;
+                    ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU).PrecoTotal += valor;
+                }
+                else
+                {
+                    ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU).QuantidadeProdutos--;
+                    ctx.CarrinhoUsuarios.FirstOrDefault(c => c.Carrinho_IdUsuario == idU).PrecoTotal -= valor;
+                }
                 ctx.SaveChanges();
             }
         }

@@ -31,5 +31,6 @@ namespace ecommerce
         public virtual DbSet<Produto> Produtoes { get; set; }
         public virtual DbSet<ProdutoItem> ProdutoItems { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Subcategoria> Subcategorias { get; set; }
     }
 }

@@ -33,6 +33,7 @@
     <Property Name="PesoVolumeProduto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="PrecoProduto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="EstoqueProduto" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="Produto_IdSubcategoria" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProdutoItem">
     <Key>
@@ -40,6 +41,14 @@
     </Key>
     <Property Name="CodigoProdutoItem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CodigoProduto" Type="int" Nullable="false" />
+    <Property Name="SituacaoItem" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subcategoria">
+    <Key>
+      <PropertyRef Name="IdSubcategoria" />
+    </Key>
+    <Property Name="IdSubcategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeSubcategoria" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -111,12 +120,25 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Produto_IdSubcategoria">
+    <End Role="Subcategoria" Type="Self.Subcategoria" Multiplicity="1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategoria">
+        <PropertyRef Name="IdSubcategoria" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="Produto_IdSubcategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="EcommerceDBModelStoreContainer">
     <EntitySet Name="CarrinhoUsuario" EntityType="Self.CarrinhoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarrinhoUsuarioProduto" EntityType="Self.CarrinhoUsuarioProduto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NivelUsuario" EntityType="Self.NivelUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProdutoItem" EntityType="Self.ProdutoItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="Carrinho_IdUsuario" Association="Self.Carrinho_IdUsuario">
       <End Role="Usuario" EntitySet="Usuario" />
@@ -137,6 +159,10 @@
     <AssociationSet Name="IdNivelUsuario" Association="Self.IdNivelUsuario">
       <End Role="NivelUsuario" EntitySet="NivelUsuario" />
       <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="Produto_IdSubcategoria" Association="Self.Produto_IdSubcategoria">
+      <End Role="Subcategoria" EntitySet="Subcategoria" />
+      <End Role="Produto" EntitySet="Produto" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

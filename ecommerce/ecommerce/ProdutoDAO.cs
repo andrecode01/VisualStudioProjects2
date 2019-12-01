@@ -8,6 +8,35 @@ namespace ecommerce
     public partial class Produto
     {
 
+        public string GetNomeSubcategoria
+        {
+            get
+            {
+                using (var ctx = new EcommerceDBEntities1())
+                {
+                    return ctx.Subcategorias
+                        .FirstOrDefault(cat => cat.IdSubcategoria == Produto_IdSubcategoria)
+                        .NomeSubcategoria;
+                }
+            }
+        }
+
+        public int ItensDisponiveis
+        {
+            get { 
+                using (var ctx = new EcommerceDBEntities1())
+                {
+                    int itd = 0;
+                    List<ProdutoItem> lpi = ProdutoItem.ObterEstoqueByProduto(CodigoProduto);
+                    for (int i = 0; i < lpi.Count(); i++)
+                        if (lpi[i].CodigoProduto == CodigoProduto && lpi[i].SituacaoItem == "disponivel")
+                            itd++;
+
+                    return itd;
+                }
+            }
+        }
+
         public static List<Produto> ObterProdutos()
         {
             List<Produto> produtos = new List<Produto>();
@@ -38,20 +67,36 @@ namespace ecommerce
                 p.NomeProduto = "Produto " + i;
                 p.PesoVolumeProduto = i * 5;
                 p.PrecoProduto = i * 10;
-                CadastrarProduto(p);
 
-                for(var j = 0;  j < qtd; j++)
-                    ProdutoItem.AdicionarProdutoItemEstoque(p.CodigoProduto);
+                var subcats = Subcategoria.ObterSubcategorias().ToList();
+                p.Produto_IdSubcategoria = subcats[i - 1].IdSubcategoria;
+
+                CadastrarProduto(p, 10);
             }
         }
 
-        public static void CadastrarProduto(Produto p)
+        public static void CadastrarProduto(Produto p, int qtdEstoque)
         {
             using (var ctx = new EcommerceDBEntities1())
             {
                 ctx.Produtoes.Add(p);
                 ctx.SaveChanges();
             }
+
+            
+            ProdutoItem.AdicionarProdutoItemEstoque(p.CodigoProduto, qtdEstoque);
+        }
+
+        public static List<Produto> ObterProdutosBySubcategoria(string filtro)
+        {
+            List<Produto> lp = ObterProdutos().ToList();
+            List<Produto> lpf = new List<Produto>();
+
+            for (int i = 0; i < lp.Count(); i++)
+                if (lp[i].Produto_IdSubcategoria == Convert.ToInt32(filtro))
+                    lpf.Add(lp[i]);
+
+            return lpf;
         }
 
         public static Produto ObterProdutoByCodigo(int cod)
