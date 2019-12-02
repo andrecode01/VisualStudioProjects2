@@ -105,7 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adm\CadastrarProduto.aspx" />
+    <Content Include="adm\CadastrarSubcategoria.aspx" />
     <Content Include="adm\GerenciarProdutos.aspx" />
+    <Content Include="adm\Upload.aspx" />
     <Content Include="App_Data\EcommerceDB.mdf" />
     <Content Include="App_Data\EcommerceDB_log.ldf">
       <DependentUpon>EcommerceDB.mdf</DependentUpon>
@@ -158,12 +160,26 @@
     <Compile Include="adm\CadastrarProduto.aspx.designer.cs">
       <DependentUpon>CadastrarProduto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adm\CadastrarSubcategoria.aspx.cs">
+      <DependentUpon>CadastrarSubcategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\CadastrarSubcategoria.aspx.designer.cs">
+      <DependentUpon>CadastrarSubcategoria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adm\GerenciarProdutos.aspx.cs">
       <DependentUpon>GerenciarProdutos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\GerenciarProdutos.aspx.designer.cs">
       <DependentUpon>GerenciarProdutos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\Upload.aspx.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\Upload.aspx.designer.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
     </Compile>
     <Compile Include="CarrinhoUsuario.cs">
       <DependentUpon>EcommerceEF.tt</DependentUpon>
@@ -240,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="upload\fotos\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

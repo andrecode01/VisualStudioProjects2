@@ -9,7 +9,8 @@
 <body>
     
     <a href="../">Ínicio</a> <hr />
-    <a href="CadastrarProduto.aspx" target="_blank">Cadastrar Novo Produto</a>
+    <a href="CadastrarProduto.aspx" target="_blank">Cadastrar Novo Produto</a> <hr />
+    <a href="CadastrarSubcategoria.aspx" target="_blank">Cadastrar Nova Subcategoria</a>
 
     <asp:ListView id="lvGerenciarProdutos" runat="server">
         <ItemTemplate>
@@ -19,8 +20,9 @@
                 <p>Preço: <%# Eval("PrecoProduto") %></p>
                 <p>SubCategoria: <%# Eval("GetNomeSubcategoria") %></p>
                 <p>Estoque/Disponivel[<%# Eval("EstoqueProduto") %>/<%# Eval("ItensDisponiveis") %>]</p>
-                <progress value="<%# Eval("ItensDisponiveis") %>" max="<%# Eval("EstoqueProduto") %>"></progress>
-                <a href="GerenciarProdutos.aspx"></a>
+                <progress value="<%# Eval("ItensDisponiveis") %>" max="<%# Eval("EstoqueProduto") %>"></progress> <br />
+                <a href="CadastrarProduto.aspx?codalt=<%# Eval("CodigoProduto") %>">Alterar Dados</a>
+                <a href="Upload.aspx?cod=<%# Eval("CodigoProduto") %>">+Foto</a>
             </div>
         </ItemTemplate>
     </asp:ListView>

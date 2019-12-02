@@ -28,7 +28,7 @@
         href="/adm/GerenciarProdutos.aspx"  
         target="_blank"
         runat="server">
-        Gerenciar Produtos
+        Gerenciar Produtos <i class="fa fa-cogs"></i>
     </a>
 
     <nav>
@@ -37,21 +37,26 @@
             <p>R$ <span id="totalRsCar" runat="server">*</span></p>
         </div>
     </nav>
-    <p>
-        Filtrar por: <br />
+
+    <p class="filtro">
+        Filtrar por <br />
+        <a href="Default.aspx?">#Todos</a>
         <asp:ListView ID="lvFiltro" runat="server">
+            
             <ItemTemplate>
                 <a href="Default.aspx?filtro=<%# Eval("IdSubcategoria") %>" >#<%# Eval("NomeSubcategoria") %></a>
             </ItemTemplate>
         </asp:ListView>
     </p>
+
     <div class="p-container">
         <asp:ListView id="lvProdutos" runat="server">
             <ItemTemplate>
                 <div class="p-item" onclick="window.open('PerfilProduto.aspx?cod=<%#Eval("CodigoProduto") %>')" target="_blank">
+                    <img src='upload/fotos/<%# Eval("CodigoProduto") + "0-p.jpg" %>' />
                     <p><%# Eval("NomeProduto") %></p>
-                    <p><%# Eval("PrecoProduto") %></p>
-                    <p><%# Eval("EstoqueProduto") %></p>
+                    <p>Preço: <%# Eval("PrecoProduto") %></p>
+                    <p>Estoque: <%# Eval("EstoqueProduto") %></p>
                     <p>#<%# Eval("GetNomeSubcategoria") %></p>
                 </div>
             </ItemTemplate>

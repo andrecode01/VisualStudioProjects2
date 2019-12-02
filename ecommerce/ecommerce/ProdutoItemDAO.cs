@@ -25,6 +25,16 @@ namespace ecommerce
             }
         }
 
+        public static void RemoverProdutoItemEstoque(int codP, int idU)
+        {
+            /*var piEstoque = ProdutoItem.ObterEstoqueByProduto(codP);
+            var listaCUP = CarrinhoUsuarioProduto.ObterCarrinhoUsuarioProduto(idU, codP).ToList();
+
+            for (int i = 0; i < piEstoque.Count(); i++)
+                if(listaCUP.FirstOrDefault(lcup => lcup.CodigoProdutoItem == piEstoque[i].CodigoProdutoItem) != null)
+                    CarrinhoUsuarioProduto.RemoveItemCarrinho(piEstoque[i])*/
+        }
+
         public static List<ProdutoItem> ObterEstoqueByProduto(int codP)
         {
             using (var ctx = new EcommerceDBEntities1())
